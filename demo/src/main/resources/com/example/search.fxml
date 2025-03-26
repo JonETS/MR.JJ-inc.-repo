@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SearchController">
+   <children>
+      <Pane>
+         <children>
+            <Button fx:id="HomeButton" layoutX="114.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="32.0" prefWidth="71.0" text="HOME" />
+            <HBox alignment="CENTER" layoutX="420.0" prefHeight="32.0">
+               <children>
+                  <TextField alignment="CENTER" prefHeight="32.0" prefWidth="411.0" text="Search" />
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="51.0" text="Search" />
+               </children>
+            </HBox>
+            <Button fx:id="CartButton" layoutX="1120.0" mnemonicParsing="false" onAction="#switchToCart" prefHeight="32.0" prefWidth="57.0" text="CART" />
+            <Button fx:id="AccountButton" layoutX="1197.0" mnemonicParsing="false" onAction="#switchToAccount" prefHeight="32.0" prefWidth="71.0" text="ACCOUNT" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Pane>
+      <SplitPane dividerPositions="0.25">
+         <items>
+            <VBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Label text="Categories" />
+                  <Button mnemonicParsing="false" text="Category1" />
+                  <Button layoutX="10.0" layoutY="70.0" mnemonicParsing="false" text="Category2" />
+                  <Button layoutX="10.0" layoutY="157.0" mnemonicParsing="false" text="Category3" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="ProductButton" mnemonicParsing="false" onAction="#switchToProduct">
+                     <graphic>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../OneDrive/Desktop/MRJJ%20JAVA/PRODUCT_IMAGE_HERE.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER" spacing="20.0">
+                                 <children>
+                                    <Label text="Product Name" />
+                                    <Label text="Product Price" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="ProductButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToProduct">
+                     <graphic>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../OneDrive/Desktop/MRJJ%20JAVA/PRODUCT_IMAGE_HERE.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox alignment="CENTER" spacing="20.0">
+                                 <children>
+                                    <Label text="Product Name" />
+                                    <Label text="Product Price" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
