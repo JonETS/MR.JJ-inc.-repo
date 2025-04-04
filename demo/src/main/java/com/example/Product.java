@@ -6,17 +6,34 @@ public class Product {
     private static String productName;
     private static double productPrice;
     private static boolean isInStock;
-    //methods
-    public static double getPrice(){
+    //getters/setters
+    public String getProductName(){
+        return productName;
+    }
+    public double getPrice(){
         return productPrice;
     }
-    public static int getProductID(){
+    public int getProductID(){
         return productID;
     }
-    private static void updateStock(boolean stock){
-
+    public boolean getStock(){
+        return isInStock;
     }
-    private static void setPrice(double newPrice){
-        
+    public void setName(String name){
+        productName = name;
+    }
+    public void setStock(boolean stock){
+        isInStock = stock;
+    }
+    public void setPrice(double newPrice){
+        productPrice = newPrice;
+    }
+    public void setProductID(int newID){
+        productID = newID;
+    }
+    //method to print info about product
+    public void displayProduct() {
+        System.out.println("Product ID: " + productID + ", Name: " + productName + 
+        ", Price: $" + productPrice + ", In Stock: " + isInStock);
     }
 }
