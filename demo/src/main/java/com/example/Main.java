@@ -3,10 +3,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.IOException;
 import java.io.BufferedReader;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -19,8 +17,10 @@ public class Main {
             System.out.println("File created: " + products.getName());
         }
         //when adding products to text file, format should be:
-        //ProductName price(double) instock(true or false)
-        //NextProduct price instock (note each seperated by spaces)
+        //ProductName, price(double), instock(true or false) (each var seperated by comma)
+        //example: "Yellow Shirt, 10.99, true"
+        //new line for each additional product
+            
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -31,39 +31,39 @@ public class Main {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             int counter = 0;
-            String word;
+            //read each line in the file
             while ((line = reader.readLine()) != null) {
-                Scanner scanner = new Scanner(line);
+                line = line.trim(); // Remove leading and trailing whitespace
+                if (line.isEmpty()) {
+                    continue; // Skip empty lines
+                }
+                String[] parts = line.split(","); // Split the line by commas
                 productList.add(new Product());
-                //set Product ID to match index in list
+                // Set Product ID to match index in list
                 productList.get(counter).setProductID(counter);
-                //read file and set name, price, and stock of product in current index
-                if(scanner.hasNext()) {
-                    word = scanner.next();
-                    productList.get(counter).setName(word);
+                // Read file and set name, price, and stock of product in current index
+                if (parts.length > 0) {
+                    productList.get(counter).setName(parts[0].trim());
                 }
-                if(scanner.hasNext()){
-                    word = scanner.next();
-                    productList.get(counter).setPrice(Double.parseDouble(word));
+                if (parts.length > 1) {
+                    productList.get(counter).setPrice(Double.parseDouble(parts[1].trim()));
                 }
-                if(scanner.hasNext()) {
-                    word = scanner.next();
-                    //if "true" is on txt file, set stock to true, if else set to false
-                    productList.get(counter).setStock(Boolean.parseBoolean(word));
-                }                    
+                if (parts.length > 2) {
+                    productList.get(counter).setStock(Boolean.parseBoolean(parts[2].trim()));
+                }
                 counter++;
-                scanner.close();
             }
+        //close reader and display error message if necessary
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing number: " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Error with array index: " + e.getMessage());
         }
+        //print all products created in list:
         for(int i = 0; i < productList.size(); i++){
             productList.get(i).displayProduct();
         }
-        //Product p1 = new Product("test", 20.99, true);
-       // p1.displayProduct();
-        //System.out.println(p1.getProductName());
-
-
     }
 }
