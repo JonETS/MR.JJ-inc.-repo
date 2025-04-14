@@ -1,2 +1,2 @@
-Shirt 20.99 true
-Pants 12.99 true
+Yellow Shirt, 20.99, true
+Brown Khaki Pants, 12.99, true
