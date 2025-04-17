@@ -1,0 +1,68 @@
+﻿Superman Socks, Socks, 18.99, True
+Green Shirt, Shirts, 24.99, True
+Green Socks, Socks, 9.99, True
+Blue Denim Jeans, Pants, 44.99, True
+Red Shirt, Shirts, 24.99, True
+Red Hat, Hat, 19.99, True
+Orange Shirt, Shirts, 24.99, True
+Red Shorts, Shorts, 19.99, True
+White Shirt, Shirts, 24.99, False
+Blue Hoodie, Hoodie, 59.99, True
+Tie Dye Rainbow Shirt, Shirts, 29.99, False
+Black Socks, Socks, 7.99, False
+Black CSUN Sweatpants, Pants, 99.99, False
+Spongebob Socks, Socks, 14.99, False
+Spongebob Hoodie, Hoodie, 49.99, False
+Grey Sweatpants, Pants, 39.99, True
+Black Dress Shirt, Shirts, 29.99, False
+White Hoodie, Hoodie, 59.99, True
+Pink Sweatpants, Pants, 39.99, True
+Grey CSUN Sweatpants, Pants, 99.99, False
+Orange Sweatpants, Pants, 39.99, True
+CSUN Hat, Hat, 99.99, False
+Yellow Shirt, Shirts, 24.99, True
+Green Shorts, Shorts, 19.99, True
+White Denim Jeans, Pants, 44.99, True
+Blue Shorts, Shorts, 19.99, True
+Spiderman Hoodie, Hoodie, 75.00, True
+CSUN Grey Shirt, Shirts, 69.99, True
+Spiderman Shirt, Shirts, 27.99, True
+Light Blue Shirt, Shirts, 29.99, False
+White Socks, Socks, 6.99, False
+Black Sweatpants, Pants, 39.99, True
+Violet Shirt, Shirts, 24.99, True
+CSUN Grey Shorts, Shorts, 49.99, False
+Spiderman Socks, Socks, 18.99, True
+Red Hoodie, Hoodie, 59.99, False
+Black Shorts, Shorts,  19.99, False
+Blue Shirt, Shirts, 24.99, True
+CSUN Flannel Shorts, Shorts, 59.99, True
+CSUN White Shirt, Shirts, 69.99, True
+Green Sweatpants, Pants, 39.99, True
+Red Sweatpants, Pants, 39.99, True
+Blue Sweatpants, Pants, 39.99, True
+Orange Shorts, Shorts, 19.99, True
+Indigo Shirt, Shirts, 24.99, True
+Captain America Socks, Socks, 18.99, True
+Indigo Sweatpants, Pants, 39.99, True
+Tie Dye Hoodie, Hoodie, 65.00, True
+Helicopter Hat, Hat, 24.99, True
+Violet Shorts, Shorts, 19.99, True
+White Sweatpants, Pants, 39.99, True
+CSUN Hoodie, Hoodie, 199.99, True
+Black Shirt, Shirts, 24.99, False
+Batman Socks, Socks, 18.99, True
+CSUN Black Shorts, Shorts, 49.99, True
+Grey Shirt, Shirts, 24.99, True
+Rainbow Shorts, Shorts, 22.99, True
+Sports Visor, Hat, 10.99, True
+Black Hoodie, Hoodie, 59.99, True
+Black Denim Jeans, Pants, 44.99, True
+CSUN Black Shirt, Shirts, 69.99, True
+Violet Sweatpants, Pants, 39.99, True
+Brown Shirt, Shirts, 24.99, True
+Yellow Sweatpants, Pants, 39.99, True
+White Dress Shirt, Shirts, 29.99, False
+Indigo Shorts, Shorts, 19.99, True
+CSUN Red Shirt, Shirts, 69.99, True
+Yellow Shorts, Shorts, 19.99, True
