@@ -51,14 +51,15 @@ public class SearchDisplay {
       */
     public ArrayList NextPage(ArrayList<Integer> CurrentIndexList){//CurrentIndexList is a size of 8 products, wont do Next if Cur is not a full page & >0 remaining products exist (.ie last page)
         ArrayList<Integer> NewIndexList = new ArrayList<>();
-        int CurEndingIndex = CurrentIndexList.get(CurrentIndexList.size()-1);//get index of last product currently displayed
+        int NewEndingIndex = 0;//temporary
+        int CurEndingIndex = ProductDisplayList.indexOf(CurrentIndexList.get(CurrentIndexList.size()-1));;//get index of last product currently displayed
         int NewStartingIndex = CurEndingIndex+1; //always the next one after the last
         if(ProductDisplayList.get(CurEndingIndex+8) != null){//check if there are 8 more products
             //add 8 to every index in Current and return
-            int NewEndingIndex = CurEndingIndex+8;
+            NewEndingIndex = CurEndingIndex+8;
         }
         else{//check how many products remain (1-7)
-            int NewEndingIndex = CurEndingIndex+7;
+            NewEndingIndex = CurEndingIndex+7;
             while(NewEndingIndex != CurEndingIndex+1){//check if product exists
                 if(ProductDisplayList.get(NewEndingIndex)!= null){//product found
                     break;
@@ -79,19 +80,20 @@ public class SearchDisplay {
      * @return NewIndexList
      */
     public ArrayList PreviousPage(ArrayList<Product> CurrentIndexList){//CurrentIndexList is either full or the last page(varying size), wont do Previous if Cur is first page
-        ArrayList<Integer>NewIndexList = new ArrayList();
-        int CurStartingIndex = CurrentIndexList.get(0);//starting is always 0
+        ArrayList<Integer> NewIndexList = new ArrayList();
+        int CurStartingIndex = ProductDisplayList.indexOf(CurrentIndexList.get(0));//starting is always 0
+        int NewStartingIndex =0;
         int NewEndingIndex = CurStartingIndex-1;
         if(CurStartingIndex - 8 > 0){//previous is not the first page
-            int NewStartingIndex = CurStartingIndex - 8;
+            NewStartingIndex = CurStartingIndex - 8;
         }
         else{//previous is first page
-            int NewStartingIndex = 0;//first page is 0-7
+            NewStartingIndex = 0;//first page is 0-7
         }//NewStartingIndex found
         for(int i=NewStartingIndex; i<NewEndingIndex; i++){
             NewIndexList.add(i);
         }
-        return NewIndexList();
+        return NewIndexList;
     }
 
     //POTENTIAL REFACTORING WITH FOR LOOP IN NEXT AND PREVIOUS, have parameters be starting and ending index
