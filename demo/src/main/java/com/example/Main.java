@@ -1,17 +1,29 @@
 package com.example;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.BufferedReader;
 
+/**
+ * This class initializes the product list, reads product data from a file,
+ * and creates Product objects based on the data.
+ * It also handles file creation and reading errors.
+ * @author Ricky McCobb
+ * @version 1.0
+ */
 public class Main {
     public static void main(String[] args) {
-        //list of products
+        /**
+         * The main method initializes the product list, creates a file for products,
+         * reads product data from the file, and creates Product objects based on the data.
+         */
         ArrayList<Product> productList = new ArrayList<>();
-        //create text file for products, if file already exists, move on
         try {
+        /**
+         * Creates a new file named "productFile.txt" in the current directory.
+         * If the file already exists, it will not be created again.
+         */
         File products = new File("productFile.txt");
         if (products.createNewFile()) {
             System.out.println("File created: " + products.getName());
@@ -20,18 +32,25 @@ public class Main {
         //ProductName, price(double), instock(true or false) (each var seperated by comma)
         //example: "Yellow Shirt, 10.99, true"
         //new line for each additional product
-            
+
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
         
-        //read data from file and create product objects from it
+        /**
+         * Reads product data from the "productFile.txt" file.
+         * Each line of the file should contain product information in the format:
+         * "ProductName, price(double), instock(true or false)".
+         * The data is split by commas and used to create Product objects.
+         * The product ID is set to match the index in the list.
+         * If the file cannot be read or if there are parsing errors, an error message is displayed.
+         */
         String filePath = "productFile.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             int counter = 0;
-            //read each line in the file
+            //read each line of the file
             while ((line = reader.readLine()) != null) {
                 line = line.trim(); // Remove leading and trailing whitespace
                 if (line.isEmpty()) {
@@ -61,9 +80,12 @@ public class Main {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Error with array index: " + e.getMessage());
         }
-        //print all products created in list:
-        for(int i = 0; i < productList.size(); i++){
-            productList.get(i).displayProduct();
+
+        /**
+         * Displays the product information for each product in the list.
+         */
+        for(Product product : productList) {
+            product.displayProduct();
         }
     }
 }
