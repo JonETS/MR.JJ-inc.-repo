@@ -8,7 +8,12 @@ Ex. if there are no more products left (ie. first page-> wont call PreviousPage 
 (StartDisplay is done when user first requested Search, intial display[ie. first page])
 */
 /**
- * SearchDisplay Info
+ * SearchDisplay.java
+ * 4/17/25
+ * @author John Soriano
+ * Handles the display of products in the Search Page. 
+ * Calculates the set of products to be displayed.
+ * Creates a list of indicies of the next products to be displayed.
  */
 public class SearchDisplay {
     //attributes

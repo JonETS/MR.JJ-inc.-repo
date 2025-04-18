@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale.Category;
-
+/**
+ * Search.java
+ * 4/17/25
+ * @author John Soriano
+ * Filters out products based on user's search input. Able to filter by name or by category.
+ * Creates a list of products to be displayed. 
+ */
 public class Search {
     //attributes
     private ArrayList<String> productCategories = new ArrayList<>(); //list of all categories
@@ -103,7 +109,7 @@ private ArrayList RankedSearchByName(ArrayList<Product> ProductsMatched, Int[] P
 /**
  * Takes user's input from category tab and searches for Products. Returns an ArrayList of Products to be displayed.
  * @param User_Category
- * @return
+ * @return CategoryList
  */
 public ArrayList CategoryRequested(String User_Category){
     int CategoryFound = SearchbyCategory(User_Category);
@@ -114,7 +120,7 @@ public ArrayList CategoryRequested(String User_Category){
 /**
  * Determines which category is being requested. Returns an integer, the index of where the category's list will be found.
  * @param User_Category
- * @return
+ * @return CategoryFound
  */
 private Int SearchByCategory(String User_Category){
     //determine which category is requested
@@ -141,6 +147,10 @@ public void setProductListForSearch(Arraylist<Product> plist){
 public void setCategoriesForSearch(ArrayList<String> clist){
     productCategories = clist;
 }
+/**
+ * Set the list of lists of products in each category to be used in the Search Class.
+ * @param pclist
+ */
 public setCategoryListForSearch(Arraylist<ArrayList> pclist){
     productListCategories = pclist;
 }
