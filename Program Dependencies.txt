@@ -1,0 +1,14 @@
+﻿This program uses JavaFX and JavaxMail 
+
+
+JavaxMail Download link:
+https://javaee.github.io/javamail/#Download_JavaMail_Release
+
+
+JavaFX Download link:
+https://openjfx.io/
+
+
+JavaxMail Help Installation Links:
+https://javaee.github.io/javamail/docs/README.txt
+https://javaee.github.io/javamail/FAQ
