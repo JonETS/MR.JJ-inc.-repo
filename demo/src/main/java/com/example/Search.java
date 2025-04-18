@@ -1,97 +1,147 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.List;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale.Category;
 
 public class Search {
     //attributes
-    private static String[] Categories;
-    private static List<String> productNames = new ArrayList<>();//index are IDs
-    //methods
-    private static void SearchByName(String name){
-        //empty search
-        if (name == ""){
-            return; //have it load search without any filters
-        }
-        //prep user's search
-        name = name.toLowerCase();//contains is case-sensitive
-        String[] UserSearch = name.split(" ");
-        List<String> UserSearchList = Arrays.asList(UserSearch);
+    private ArrayList<String> productCategories = new ArrayList<>(); //list of all categories
+    private ArrayList<ArrayList> productListCategories = new ArrayList<>(); //list of lists of products in a category
+    private ArrayList<Product> productList = new ArrayList<>(); //list of all products
+/**
+ * Takes user's input from searchbar and searches for Products. Returns an ArrayList of Products to be displayed.
+ * @param User_Searched
+ * @return ProductsToBeDisplayed
+ */
+public ArrayList StartSearch(String User_Searched){
+    //base case ("   ")
+    if(User_Searched.isBlank() == true){
+        return productList; //returns whole list, unfiltered
+    }
 
-        //filter by user's search
-        List<Integer> MatchProductID = new ArrayList<>();//id of product
-        List<Integer> MatchProductHits = new ArrayList<>();//# of matches for a product
-        int CurrentProductID=0;
-        while(CurrentProductID < productNames.size()){
-            int CurrentUserSearch=0;
-            boolean InsertedID = false;
-            int hits = 0;
-            while(CurrentUserSearch < UserSearchList.size()){
-                if(productNames.get(CurrentProductID).contains(UserSearchList.get(CurrentUserSearch))){//match found
-                    if(InsertedID==false){
-                        MatchProductID.add(CurrentProductID);//only add product id once
-                        InsertedID = true;
-                    }
-                    hits++;
+    //otherwise
+    ArrayList<String> SearchFor = ConvertUserSearch(User_Searched);
+    ArrayList<Product> ProductsMatched = SearchByName(SearchFor);
+    Int[] ProductsScore = ScoreSearchByName(ProductsMatched, SearchFor);
+    ArrayList<Product> ProductsToBeDisplayed = RankedSearchByName(ProductsMatched, ProductsScore);
+    return ProductsToBeDisplayed;
+}
+/**
+ * Splits User_Searched and puts it into an ArrayList, SearchFor.
+ * @param User_Searched
+ * @return SearchFor
+ */
+private ArrayList ConvertUserSearch(String User_Searched){
+    String[] Search_Array = User_Searched.split("\\s+");// "\\s+" - split by whitespace
+    ArrayList<String> SearchFor = new ArrayList(Arrays.asList(Search_Array));
+    return SearchFor;
+}
+/**
+ * Checks if the Product's name contains any of the searched words. Returns a list of products with matches found.
+ * @param SearchFor
+ * @return ProductsMatched
+ */
+private ArrayList SearchByName(ArrayList<String> SearchFor){
+    ArrayList<Product> ProductsMatched = new ArrayList<>();
+    for(int i=0; i<productList.size(); i++){//current product
+        for(int j=0; j<SearchFor.size(); j++){//current searched word
+            if(productList.get(i).getProductName().contains(SearchFor.get(j))){//match found
+                ProductsMatched.add(productList.get(i));
+                break; //move onto next product
+            }
+        }
+    }
+    return ProductsMatched;
+}
+/**
+ * Checks the list of products with matches and how many of the searched words are found in the Product's name. Here, a Product will have a minium score of 1. Returns an array of # of matches found per Product.
+ * @param ProductsMatched
+ * @param SearchFor
+ * @return ProductsScore
+ */
+private Int[] ScoreSearchByName(ArrayList<Product> ProductsMatched, ArrayList<String> SearchFor){
+    Int[] ProductsScore = new Int[ProductsMatched.size()];
+    for(int i=0; i<ProductsMatched.size(); i++){//current product
+        for(int j=0; j<SearchFor.size(); j++){//current searched word
+            if(ProductsMatched.get(i).getProductName().contains(SearchFor.get(j))){//match found
+                ProductsScore[i]++;
+            }
+        }
+    }
+    return ProductsScore;
+}
+/**
+ *Arranges the Products with matches by # of matches and puts it into a ArrayList. The first Product in the ArrayList has the most matches. Returns an ArrayList with the Products ranked in order.
+ * @param ProductsMatched
+ * @param ProductsScore
+ * @return ProductsRanked
+ */
+private ArrayList RankedSearchByName(ArrayList<Product> ProductsMatched, Int[] ProductsScore){
+    ArrayList<Product> ProductsRanked = new ArrayList<>();
+    for(int i=0; i<ProductsMatched.size(); i++){//current product
+        if(ProductsRanked.isEmpty()){//first product
+            ProductsRanked.add(ProductsMatched.get(i));
+        }
+        else{
+            for(int j=0; j<ProductsRanked.size(); j++){//previous products
+                if(ProductsScore[i]>ProductsScore[j]){//new product has higher rank
+                    ProductsRanked.add(j, ProductsMatched.get(i));//shifts products right and inserts new product
                 }
-                CurrentUserSearch++;
             }
-            if(hits != 0 && InsertedID == true){//redundancy
-                MatchProductHits.add(hits);
-            }//index of lists has product's id and # of matches
-            CurrentProductID++;
-        }
-
-        // no matches found
-        if(MatchProductID.isEmpty()){
-            return;
-        }
-
-        //combine id and matches
-        int TotalMatchedProducts = MatchProductID.size();
-        Integer[][] ProductsToBeRanked = new Integer[TotalMatchedProducts][2]; // id,hits
-        int CurrentMatchProduct = 0;
-        while(CurrentMatchProduct < TotalMatchedProducts){
-            ProductsToBeRanked[CurrentMatchProduct][0]= MatchProductID.get(CurrentMatchProduct);
-            ProductsToBeRanked[CurrentMatchProduct][1]= MatchProductHits.get(CurrentMatchProduct);
-            CurrentMatchProduct++;
-        }//product id and matches combined
-
-        //rank ids by matches
-        for(int j=1; j<TotalMatchedProducts; j++){
-            int tmpHits = ProductsToBeRanked[j][1];
-            int tmpID = ProductsToBeRanked[j][0];
-            int i = j-1;
-            while(i>=0 && ProductsToBeRanked[i][1]>tmpHits){//matches of i is greater than j's
-                ProductsToBeRanked[i+1][0] = ProductsToBeRanked[i][0];
-                ProductsToBeRanked[i+1][1] = ProductsToBeRanked[i][1];
-                i--;
+            if(ProductsRanked.contains(ProductsMatched.get(i))==false){//new product is last
+                ProductsRanked.add(ProductsMatched.get(i));
             }
-            ProductsToBeRanked[i+1][1] = tmpHits;
-            ProductsToBeRanked[i+1][0] = tmpID;
         }
-
-        //Make List for IDs to be returned
-        List<Integer> RankedIDList = new ArrayList<>();
-        int RankCounter = TotalMatchedProducts-1;//0 to n-1 = n elements
-        while(RankCounter >= 0){
-            RankedIDList.add(ProductsToBeRanked[RankCounter][0]);
-            RankCounter--;
-        }//IDs listed, 0=most
     }
-    private static void SearchByCategory(String category){//used by all category buttons, this could be done before hand and just pass pre-categorized results
-        int TotalCategories = Categories.length;
-        int i = 0;
-        String CategorySearched = "";
-        while(i < TotalCategories){//find which category it is
-            if(category == Categories[i]){
-                CategorySearched = Categories[i];
-                break;
-            }
-        }
-        //call ProductsCategorized and return the list of the CategorySearched
-            //What ProductsCategorized does: During assembly of products, check their tags and add their ids to the category lists of those tags
-    }
+    return ProductsRanked;
+}
 
+/**
+ * Takes user's input from category tab and searches for Products. Returns an ArrayList of Products to be displayed.
+ * @param User_Category
+ * @return
+ */
+public ArrayList CategoryRequested(String User_Category){
+    int CategoryFound = SearchbyCategory(User_Category);
+    ArrayList<Product> CategoryList = productListCategories.get(CategoryFound);
+    return CategoryList;
+}
+
+/**
+ * Determines which category is being requested. Returns an integer, the index of where the category's list will be found.
+ * @param User_Category
+ * @return
+ */
+private Int SearchByCategory(String User_Category){
+    //determine which category is requested
+    for(int i=0 ; i<productCategories.size(); i++){
+        if(User_Category == productCategories.get(i)){//category found
+            int CategoryFound = i;//get index
+            break;
+        }
+    }
+    return CategoryFound;
+}
+
+/**
+ * Set the list of Products to be used in the Search class.
+ * @param list
+ */
+public void setProductListForSearch(Arraylist<Product> plist){
+    productList = plist;
+}
+/**
+ * Set the list of Categories to be used in the Search Class.
+ * @param clist
+ */
+public void setCategoriesForSearch(ArrayList<String> clist){
+    productCategories = clist;
+}
+public setCategoryListForSearch(Arraylist<ArrayList> pclist){
+    productListCategories = pclist;
+}
 }
