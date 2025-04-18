@@ -2,10 +2,10 @@ package com.example;
 
 public class Product {
     //attributes
-    private static int productID;
-    private static String productName;
-    private static double productPrice;
-    private static boolean isInStock;
+    private int productID;
+    private String productName;
+    private double productPrice;
+    private boolean isInStock;
     //getters/setters
     public String getProductName(){
         return productName;
